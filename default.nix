@@ -9,11 +9,17 @@ in stdenv.mkDerivation rec {
   };
   buildInputs = [
     python37Full
+    python37Packages.coloredlogs
     python37Packages.jsonschema
+    python37Packages.pyaml
+    python37Packages.pydantic
     nodejs
+    watchexec
   ];
 
   shellHook = ''
+    export PATH=$PATH:$(npm bin)
+    unset name
   '';
 }
 

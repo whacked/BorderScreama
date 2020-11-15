@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "jsonschema": "^1.4.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whacked/BorderScreama.git"
+  },
+  "version": "0.0.1",
+  "name": "BorderScreama"
+}
