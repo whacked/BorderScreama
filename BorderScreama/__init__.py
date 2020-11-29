@@ -131,3 +131,11 @@ class SchemaLoader(object):
         cls._registered_schemas[namespace] = definition
         return True
 
+    @classmethod
+    def list(cls):
+        return list(cls._registered_schemas.keys())
+
+    @classmethod
+    def get(cls, key):
+        return cls._registered_schemas[key]
+
