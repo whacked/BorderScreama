@@ -8,11 +8,11 @@ in stdenv.mkDerivation rec {
     paths = buildInputs;
   };
   buildInputs = [
-    python37Full
-    python37Packages.coloredlogs
-    python37Packages.jsonschema
-    python37Packages.pyaml
-    python37Packages.pydantic
+    python38Full
+    python38Packages.coloredlogs
+    python38Packages.jsonschema
+    python38Packages.pyaml
+    python38Packages.pydantic
     nodejs
     watchexec
   ];
@@ -22,4 +22,3 @@ in stdenv.mkDerivation rec {
     unset name
   '';
 }
-
