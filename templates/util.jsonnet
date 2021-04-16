@@ -31,6 +31,21 @@ local _assertConforms(dynamic, shape) = (
   KEY_ForeignKey: 'foreignKey',
   KEY_Constraints: 'constraints',
 
+  PrimaryKeyRecord: {
+    id: {
+      type: 'integer',
+      [$.KEY_PrimaryKey]: true,
+    },
+  },
+  defaultForeignKeyRecord(foreignTableName):: {
+    // assumes the join goes over `foreignTableName`.`id`
+    type: 'integer',
+    [$.KEY_ForeignKey]: {
+      table: foreignTableName,
+      field: 'id',
+    },
+  },
+
   assertConforms(dynamic, shape):: _assertConforms(dynamic, shape),
 
   runTest(description, expect, result):: (
