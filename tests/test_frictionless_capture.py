@@ -29,13 +29,12 @@ CREATE TABLE articles (
 	location JSONB, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(parent) REFERENCES articles (id)
-)
-
+);
 
 CREATE TABLE comments (
 	entry_id INTEGER NOT NULL, 
 	comment TEXT, 
 	PRIMARY KEY (entry_id), 
 	FOREIGN KEY(entry_id) REFERENCES articles (id)
-)
+);
 '''.strip()

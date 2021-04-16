@@ -70,7 +70,8 @@ class MyMockConnection(MockConnection):
 
     @classmethod
     def render_history(cls):
-        return ''.join(cls._history)
+        return '\n\n'.join('{};'.format(statement.strip())
+                           for statement in cls._history)
 
     @classmethod
     def create_mock_engine(cls, dsn=POSTGRESQL_DSN, **kw):
