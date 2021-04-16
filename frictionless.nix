@@ -4,6 +4,7 @@ pkgs.mkShell {
     pkgs.python38Full
     pkgs.postgresql
     pkgs.glibcLocales
+    pkgs.lsb-release
   ];
 
   nativeBuildInputs = [
@@ -13,6 +14,7 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
+    export VIRTUAL_ENV=''${VIRTUAL_ENV:-venv}
     initialize-venv() {
         pip install icecream ipython
         pip install frictionless frictionless[sql] tableschema tableschema-sql psycopg2 pydantic sqlparse ddlparse
