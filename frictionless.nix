@@ -15,7 +15,7 @@ pkgs.mkShell {
   shellHook = ''
     initialize-venv() {
         pip install icecream ipython
-        pip install frictionless frictionless[sql] tableschema tableschema-sql psycopg2 pydantic
+        pip install frictionless frictionless[sql] tableschema tableschema-sql psycopg2 pydantic sqlparse ddlparse
     }
 
     ensure-venv initialize-venv
