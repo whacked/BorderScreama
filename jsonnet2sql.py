@@ -1,11 +1,12 @@
 import sys
 import json
 import _jsonnet as jsonnet
+import os.path as _p
 from jsonschema2db import JSONSchemaToPostgres
 
 
 input_file_path = sys.argv[-1]
-assert input_file_path.endswith('jsonnet')
+assert _p.splitext(input_file_path)[-1] in ('.jsonnet', '.json')
 
 json_string = jsonnet.evaluate_file(input_file_path)
 schema = json.loads(json_string)
