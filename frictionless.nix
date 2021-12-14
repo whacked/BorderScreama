@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
   buildInputs = [
-    pkgs.python38Full
+    pkgs.python39Full
     pkgs.postgresql
     pkgs.glibcLocales
     pkgs.lsb-release
