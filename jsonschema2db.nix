@@ -1,21 +1,21 @@
-with import <nixpkgs> {};
+{ pkgs ? import <nixpkgs> }:
 
 let
-  change_case = python39.pkgs.buildPythonPackage rec {
+  change_case = pkgs.python3.pkgs.buildPythonPackage rec {
     pname = "change_case";
     version = "0.5.2";
     
-    src = python39.pkgs.fetchPypi {
+    src = pkgs.python3.pkgs.fetchPypi {
       inherit pname version;
       sha256 = "1nb3w2qjx8zl327vfssqznl33r70m3i11fm1snhvmh4fi1far5k0";
     };
   };
 
-  jsonschema2db = python39.pkgs.buildPythonPackage rec {
+  jsonschema2db = pkgs.python3.pkgs.buildPythonPackage rec {
     pname = "JSONSchema2DB";
     version = "1.0.1";
 
-    src = python39.pkgs.fetchPypi {
+    src = pkgs.python3.pkgs.fetchPypi {
       inherit pname version;
       sha256 = "1857bzx77491wva6dmixm9x8pqm7kn7l29fpcdvr07niid5jh0lp";
     };
@@ -33,8 +33,8 @@ let
       '';
 
     propagatedBuildInputs = [
-      python39.pkgs.iso8601
-      python39.pkgs.psycopg2
+      pkgs.python3.pkgs.iso8601
+      pkgs.python3.pkgs.psycopg2
       change_case
     ];
 
@@ -43,4 +43,4 @@ let
     };
   };
 in
-  python39.withPackages (ps: [jsonschema2db])
+  pkgs.python3.withPackages (ps: [jsonschema2db])
