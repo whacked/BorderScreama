@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "device": {
+      "$ref": "./device.schema.json"
+    },
+    "id": {
+      "type": "integer"
+    },
+    "record": {},
+    "timestampSeconds": {
+      "type": "number"
+    },
+    "versionedSchema": {
+      "$ref": "./versioned-schema.schema.json"
+    }
+  },
+  "required": [
+    "timestampSeconds",
+    "schema",
+    "record"
+  ],
+  "title": "TimestampedRecord",
+  "type": "object"
+}

@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "content": {
+      "type": "string"
+    },
+    "id": {
+      "primary_key": true,
+      "type": "integer"
+    },
+    "parents": {},
+    "sha256": {
+      "type": "string"
+    },
+    "transformerCode": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "content"
+  ],
+  "title": "VersionedSchema",
+  "type": "object"
+}
