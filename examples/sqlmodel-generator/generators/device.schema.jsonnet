@@ -9,6 +9,12 @@
       type: 'string',
     },
     properties: {},
+    tags: {
+      type: 'array',
+      items: {
+        '$ref': './tag.schema.json',
+      },
+    },
   },
   required: ['name'],
 }

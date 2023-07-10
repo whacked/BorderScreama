@@ -7,6 +7,7 @@ import random
 
 
 from models.SQLModel_models import (
+    Tag,
     TimestampedRecord,
     Device,
     VersionedSchema,
@@ -24,27 +25,50 @@ def main():
     SQLModel.metadata.create_all(engine)
 
     with Session(engine) as session:
-        device1 = Device(name='thermometer.1', properties=json.dumps({
-            'vendor': 'vendor-A',
-        }))
-        device2 = Device(name='thermometer=2', properties=json.dumps({
-            'vendor': 'vendor B',
-        }))
+        tags = []
+        for text in ["apple", "banana", "cherry"]:
+            tag = Tag(text=text)
+            session.add(tag)
+            tags.append(tag)
+
+        device1 = Device(
+            name="thermometer.1",
+            properties=json.dumps(
+                {
+                    "vendor": "vendor-A",
+                }
+            ),
+        )
+        device1.tags = [tags[0], tags[1]]
+
+        device2 = Device(
+            name="thermometer=2",
+            properties=json.dumps(
+                {
+                    "vendor": "vendor B",
+                }
+            ),
+            tags=[tags[1], tags[2]],
+        )
 
         session.add(device1)
         session.add(device2)
 
         schema1 = VersionedSchema(
-            content=json.dumps({
-                'title': 'SomeSchema',
-                'type': 'object',
-            }),
+            content=json.dumps(
+                {
+                    "title": "SomeSchema",
+                    "type": "object",
+                }
+            ),
         )
         schema2 = VersionedSchema(
-            content=json.dumps({
-                'title': 'AnotherSchema',
-                'type': 'object',
-            }),
+            content=json.dumps(
+                {
+                    "title": "AnotherSchema",
+                    "type": "object",
+                }
+            ),
         )
 
         session.add(schema1)
@@ -54,25 +78,28 @@ def main():
             schema = random.choice([schema1, schema2])
             device = random.choice([device1, device2])
             tsr = TimestampedRecord(
-                timestampSeconds = time.time(),
-                record=json.dumps({
-                    'temperature': random.random(),
-                    'humidit': random.random(),
-                }),
-                device_id = device.id,
-                versionedSchema_id = schema.id,
+                timestampSeconds=time.time(),
+                record=json.dumps(
+                    {
+                        "temperature": random.random(),
+                        "humidit": random.random(),
+                    }
+                ),
+                device_id=device.id,
+                versionedSchema_id=schema.id,
             )
             session.add(tsr)
 
         session.commit()
 
     with Session(engine) as session:
-        statement = select(TimestampedRecord)
-        results = session.exec(statement)
-        for record in results:
-            pprint(record)
+        for device_result in session.exec(select(Device)):
+            pprint(list(device_result.tags))
+
+        tsr_result = session.exec(select(TimestampedRecord))
+        for tsr in tsr_result:
+            pprint(tsr)
 
 
 if __name__ == "__main__":
     main()
-
